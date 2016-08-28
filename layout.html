@@ -451,34 +451,35 @@ input[type=range].slider::-ms-thumb {
 		Player.prototype._bindPlay = function() {
 			var self = this;
 			this._playButton.on('click', function(e) {
+				self.active = true;
 				self._play();
 			})
 		}
 		Player.prototype._bindPause = function() {
 			var self = this;
 			this._pauseButton.on('click', function() {
+				self.active = false;
 				self._pause();
 			})
 		}
 		Player.prototype._bindVolume = function() {
 			var self = this;
 			this.setVolume(this._volumeInput.val())
-			if (this.active)
-				this.defineKeyframe(this._volumeInput.val())
+			this.defineKeyframe(this._volumeInput.val())
 			this._volumeInput.on('input', function(){
 				self.setVolume($(this).val());
 			});
 			this._volumeInput.on('change', function(){
 				self._removeEqualizer();
-				if (this.active)
-					self.defineKeyframe($(this).val());
+				self.defineKeyframe($(this).val());
+				if (self.active)
 					self._addEqualizer();
 				
 			})
 		}	
 		Player.prototype._play = function() {
 			console.log('-play-');
-			this.active = true;
+			console.log(this.active);
 			$playButton = this._playButton;
 			$pauseButton = this._pauseButton;
 			
@@ -490,7 +491,7 @@ input[type=range].slider::-ms-thumb {
 		}
 		Player.prototype._pause = function() {
 			console.log('-pause-');
-			this.active = false;
+			console.log(this.active);
 			$playButton = this._playButton;
 			$pauseButton = this._pauseButton;
 
