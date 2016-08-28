@@ -394,20 +394,6 @@ input[type=range].slider::-ms-thumb {
 <script>
 	var supportedFlag = $.keyframe.isSupported();
 
-	/*function defineKeyframe0(currentScale) {
-		min = currentScale - 0.25
-		result = (min < 0) ? 0 : min;
-		
-		$.keyframe.define([{
-			name: 'sk-stretchdelay',
-			'0%':   { transform: 'scaleY(' + result + ')' }, 
-			'50%':  { transform: 'scaleY(' + result + ')' }, 
-			'100%': { transform: 'scaleY(' + result + ')' },
-			'25%':  { transform: 'scaleY(' + currentScale + ')' },
-			'75%':  { transform: 'scaleY(' + currentScale + ')' }
-		}]);
-	}*/
-	
 		Player.prototype.cycle = function(){
 			return {
 				name: 'sk-stretchdelay' + this.id,
@@ -420,6 +406,7 @@ input[type=range].slider::-ms-thumb {
 		function Player(audio, i) {
 			this.instanse = $(audio);
 			this.id = i;
+			this.active = false;
 			this.player_instanse = $(audio).get(0);
 			
 			this._parentBlock = this.instanse.parents('.block')
@@ -476,19 +463,22 @@ input[type=range].slider::-ms-thumb {
 		Player.prototype._bindVolume = function() {
 			var self = this;
 			this.setVolume(this._volumeInput.val())
-			this.defineKeyframe(this._volumeInput.val())
+			if (this.active)
+				this.defineKeyframe(this._volumeInput.val())
 			this._volumeInput.on('input', function(){
 				self.setVolume($(this).val());
 			});
 			this._volumeInput.on('change', function(){
 				self._removeEqualizer();
-				self.defineKeyframe($(this).val());
-				self._addEqualizer();
+				if (this.active)
+					self.defineKeyframe($(this).val());
+					self._addEqualizer();
 				
 			})
 		}	
 		Player.prototype._play = function() {
 			console.log('-play-');
+			this.active = true;
 			$playButton = this._playButton;
 			$pauseButton = this._pauseButton;
 			
@@ -500,6 +490,7 @@ input[type=range].slider::-ms-thumb {
 		}
 		Player.prototype._pause = function() {
 			console.log('-pause-');
+			this.active = false;
 			$playButton = this._playButton;
 			$pauseButton = this._pauseButton;
 
