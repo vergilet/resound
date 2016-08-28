@@ -3,14 +3,33 @@
 <meta content='width=device-width, initial-scale=1.0' name='viewport'>
 <script src="js/jq.js"></script>
 <script src="js/jquery.keyframes.min.js"></script>
+<script src="js/jasny-bootstrap.min.js"></script>
 <script src="js/logic.js"></script>
 <link href="css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="css/jasny-bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
 <link href="css/styles.css" media="screen" rel="stylesheet" type="text/css" />
 </head>
 <body>
-<header></header>
+ 
+<header>
+	<div class="navmenu navmenu-default navmenu-fixed-left offcanvas">
+      <a class="navmenu-brand" href="#">Project name</a>
+      <ul class="nav navmenu-nav">
+        <li><a href="#">Link</a></li>
+      </ul>
+    </div>
+
+    <div class="navbar navbar-default navbar-fixed-top">
+      <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target=".navmenu" data-canvas="body">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+</header>
 <div id="content" class="container-fluid">
 <div id="panel">
+
 <div id="title">
 	  ReSound
 </div>
