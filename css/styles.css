@@ -17,12 +17,14 @@
 }
 
 .spinner > div:last-child {
-	margin-right: 0px;
+  margin-right: 0px;
 }
 
 input[type=range].slider {
   -webkit-appearance: none;
   width: 100%;
+  height: 100%;
+  opacity: 25%;
   margin: 0px 0;
 }
 input[type=range].slider:focus {
